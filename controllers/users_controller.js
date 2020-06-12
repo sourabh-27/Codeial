@@ -20,38 +20,29 @@ module.exports.signIn = function(req, res){
     });
 };
 
-//get the sign up data
+// get the sign up data
 module.exports.create = function(req, res){
-    console.log("details", req.body);
-    console.log("create called", req.body.password, req.body.confirm_password);
-    if(req.body.password != req.body.confirm_password){
-        console.log("I am going here");
+    if (req.body.password != req.body.confirm_password){
         return res.redirect('back');
     }
-    console.log("Finding user", User.findOne({email:req.body.email}));
-    User.findOne({email:req.body.email}, function(err, user){
-        console.log("User: ", user);
-        if(err){
-            console.log("Error in finding user in signing up"); return;
-        }
-        if(!user){
+
+    User.findOne({email: req.body.email}, function(err, user){
+        if(err){console.log('error in finding user in signing up'); return}
+
+        if (!user){
             User.create(req.body, function(err, user){
-                if(err){
-                    console.log("Error in creating user while signing up"); return;
-                }
-                console.log("Successfully created the user");
+                if(err){console.log('error in creating user while signing up'); return}
+
                 return res.redirect('/users/sign-in');
-            });
-        }
-        else{
-            console.log("User already exists");
+            })
+        }else{
             return res.redirect('back');
         }
+
     });
 }
 
-//sign in and create a session for the user
+// sign in and create a session for the user
 module.exports.createSession = function(req, res){
-    //todo later
-
+    return res.redirect('/');
 }
