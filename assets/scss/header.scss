@@ -1,0 +1,30 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1286F8;
+    height: 4rem;
+    h1{
+        a{
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 1rem;
+            color: white;
+        }
+    }
+    ul{
+        display: flex;
+        width: 13%;
+        justify-content: space-evenly;
+        margin-right: 1rem;
+        li{
+            list-style: none;
+            a{
+                text-decoration: none;
+                color: white;
+                font-weight: 600;
+                font-size: 1.2rem;
+            }
+        }
+    }
+}

@@ -5,14 +5,18 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title><%= locals.title %></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel="stylesheet" href="/css/user.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
     <%- style %>
 </head>
 <body>
 
     <%- include('_header'); %>
 
-    <%- body %>
+    <main id="layout-main">
+        <%- body %>
+    </main>
 
     <%- include('_footer'); %>
     <%- script %>
