@@ -21,3 +21,22 @@ module.exports.create = function(req, res){
         }
     });
 }
+
+module.exports.destroy = function(req, res){
+    console.log("Gonna destroy it !! ");
+    Comment.findById(req.params.id, function(err, comment){
+        if(comment.user == req.user.id){
+            let postId = comment.post;
+            comment.remove();
+            Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}}, function(err, post){
+                if(err){
+                    console.log("Error in deleting the comment from comments array from post");
+                    return;
+                }
+                return res.redirect('back');
+            });
+        }else{
+            return res.redirect('back');
+        }
+    });
+}

@@ -15,6 +15,14 @@
         <ul>
             <% for(post of posts){ %>
                 <p>
+                    <!-- Checking if the user exist and id of the user who have posted and id who is trying to delete is same -->
+                    <% if((locals.user) && (post.user.id == locals.user.id)) { %>
+                        <small>
+                            <a href="/posts/destroy/<%= post.id %>">
+                                X
+                            </a>
+                        </small>
+                    <% } %>
                     <li>
                         <%= post.content %>
                     </li>
@@ -36,6 +44,13 @@
                     <div class="post-comments-list">
                         <ul id="post-comments-<%= post._id %>">
                             <% for (comment of post.comments) { %> 
+                                <% if((locals.user) && (comment.user.id == locals.user.id)) { %>
+                                    <small>
+                                        <a href="/comments/destroy/<%= comment.id %>">
+                                            X
+                                        </a>
+                                    </small>
+                                <% } %>
                                 <p>
                                     <%= comment.content %>
                                     <br>
