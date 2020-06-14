@@ -1,9 +1,26 @@
 const User = require('../models/user');
 // console.log("I am inside users controller");
 module.exports.profile = function(req, res){
-    return res.render('user_profile',{
-        title: "Users"
+    User.findById(req.params.id, function(err, user){
+        return res.render('user_profile',{
+            title: "User Profile",
+            profile_user: user
+        });
     });
+}
+
+module.exports.udpate = function(req, res){
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+            if(err){
+                console.log(`Error in updating the details: ${err}`);
+                return;
+            }
+            return res.redirect('back');
+        });
+    }else{
+        return res.status(401).send('Unauthorized');
+    }
 }
 
 //render the sign up page
