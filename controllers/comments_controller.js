@@ -12,33 +12,39 @@ module.exports.create = async function(req, res){
             });
             post.comments.push(comment);
             post.save();
-    
+            req.flash('success', 'Comment published!');
+
             res.redirect('/');
         }
     }catch(err){
-        console.log(`Error in writing the comment in the post: ${err}`);
+        req.flash('error', err);
+        // console.log(`Error in writing the comment in the post: ${err}`);
         return;
     }
 }
 
 module.exports.destroy = async function(req, res){
-    console.log("Gonna destroy it !! ");
+
     try{
         let comment = await Comment.findById(req.params.id);
-        if(comment.user == req.user.id){
+
+        if (comment.user == req.user.id){
+
             let postId = comment.post;
+
             comment.remove();
-            let post = await Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}});
-            if(err){
-                console.log("Error in deleting the comment from comments array from post");
-                return;
-            }
+
+            let post = Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}});
+            req.flash('success', 'Comment deleted!');
+
             return res.redirect('back');
         }else{
+            req.flash('error', 'Unauthorized');
             return res.redirect('back');
         }
     }catch(err){
-        console.log(`Error in destroying the comment: ${err}`);
+        req.flash('error', err);
         return;
     }
+    
 }
