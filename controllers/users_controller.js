@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
 // console.log("I am inside users controller");
 module.exports.profile = function(req, res){
     User.findById(req.params.id, function(err, user){
@@ -20,7 +22,15 @@ module.exports.udpate = async function(req, res){
                 user.email = req.body.email;
 
                 if(req.file){
+
+                    //if image is already present
+                    if(user.avatar){
+                        if(fs.existsSync(path.join(__dirname + '..', user.avatar))){
+                            fs.unlinkSync(path.join(__dirname + '..', user.avatar));
+                        }
+                    }
                     //this is saving the path of the uploaded file into the avatar field in the user
+                    // console.log("path", user);
                     user.avatar = User.avatarPath + '/' + req.file.filename;
                 }
                 user.save();

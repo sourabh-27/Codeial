@@ -37,6 +37,9 @@ app.use(express.static('./assets'));
 //To use the layouts npm install express-ejs-layouts
 app.use(expressLayouts);
 
+//makes the upload path available to the browser
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
 //extract styles and script from subpages into the layout
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
