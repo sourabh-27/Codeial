@@ -18,6 +18,9 @@
                     // call the create comment class
                     new PostComments(data.data.post._id);
 
+                    // enabling the functionality of the toggle like button on the new post
+                    new ToggleLike($(' .toggle-like-button', newPost));
+
                     new Noty({
                         theme: 'relax',
                         text: "Post published!",
@@ -48,6 +51,12 @@
                         <br>
                         <small>
                             ${ post.user.name}
+                        </small>
+                        <br>
+                        <small>
+                            <a class='toggle-like-button' data-likes='0' href="/likes/toggle/?id=${post._id}&type=Post">
+                                0 likes
+                            </a>
                         </small>
                     </p>
                     <div class="post-comments">
@@ -107,27 +116,6 @@
             new PostComments(postId);
         });
     }
-
-
-    // method to submit the form data for new post using AJAX
-
-
-    // method to delete a comment from DOM
-//     let deleteComment = function(deleteLink){
-//        $(deleteLink).click(function(e){
-//            e.preventDefault();
-            
-//            $.ajax({
-//                type: 'get',
-//                url: $(deleteLink).prop('href'),
-//                success: function(data){
-//                    $(`#post-${data.data.comment_id}`).remove();
-//                },error: function(error){
-//                    console.log(error.responseText);
-//                }
-//            });
-//        });
-//    }
 
 
     createPost();
