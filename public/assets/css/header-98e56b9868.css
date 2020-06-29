@@ -1,0 +1,23 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1286F8;
+  height: 4rem; }
+  .nav h1 a {
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 1rem;
+    color: white; }
+  .nav ul {
+    display: flex;
+    width: 13%;
+    justify-content: space-evenly;
+    margin-right: 1rem; }
+    .nav ul li {
+      list-style: none; }
+      .nav ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 1.2rem; }
