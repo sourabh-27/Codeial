@@ -8,6 +8,7 @@ const port = 8000;
 const path = require('path');
 
 const app = express();
+require('./config/view-helpers')(app);
 
 //used for session cookie
 const session = require('express-session');
