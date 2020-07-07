@@ -55,7 +55,7 @@ const production = {
     google_callback_url: process.env.CODEIAL_GOOGLE_CALLBACK_URL,
     jwt_secret: process.env.CODEIAL_JWT_SECRET,
     morgan: {
-        mode: 'combined',
+        mode: 'combined' ,
         options: {stream: accessLogStream}
     }
 }
